@@ -9,8 +9,6 @@ import SiteFooter from '@/components/site/SiteFooter.astro';
 import BlogCard from '@/components/blog/BlogCard.astro';
 import Badge from '@/components/ui/data-display/Badge/Badge.astro';
 import Icon from '@/components/ui/primitives/Icon/Icon.astro';
-import NewsletterForm from '@/components/patterns/NewsletterForm.astro';
-import CTA from '@/components/ui/marketing/CTA/CTA.astro';
 import { Hero } from '@/components/hero';
 import { useTranslations, type Locale } from '@/i18n';
 import { getPosts, getPostUrl, getPostReadingTime } from '@/lib/blog';
@@ -24,7 +22,6 @@ const t = useTranslations(locale);
 
 const posts = await getPosts(locale);
 
-// Featured posts get their own section; if every post is featured, list them all below too.
 const featuredPosts = posts.filter((post) => post.data.featured);
 const nonFeaturedPosts = posts.filter((post) => !post.data.featured);
 const regularPosts = nonFeaturedPosts.length > 0 ? nonFeaturedPosts : posts;
@@ -111,13 +108,6 @@ const regularPosts = nonFeaturedPosts.length > 0 ? nonFeaturedPosts : posts;
       }
     </div>
   </section>
-
-  <CTA variant="invert" size="sm" maxWidth="lg">
-    <h2 slot="heading">{t('blog.subscribeTitle')}</h2>
-    <p slot="description">{t('blog.subscribeText')}</p>
-
-    <NewsletterForm class="mx-auto max-w-md" />
-  </CTA>
 
   <SiteFooter slot="footer" background="secondary" showCopyright={false} />
 </BaseLayout>

@@ -7,7 +7,6 @@
 import PageLayout from '@/layouts/PageLayout.astro';
 import Icon from '@/components/ui/primitives/Icon/Icon.astro';
 import Badge from '@/components/ui/data-display/Badge/Badge.astro';
-import ContactForm from '@/components/patterns/ContactForm.astro';
 import Card from '@/components/ui/data-display/Card/Card.astro';
 import { Hero } from '@/components/hero';
 import GoogleMap from '@/components/ui/data-display/GoogleMap/GoogleMap.astro';
@@ -36,32 +35,10 @@ const github = siteConfig.socialLinks.find((url) => new URL(url).hostname === 'g
     </p>
   </Hero>
 
-  <!-- Contact Section -->
   <section class="py-20 bg-surface-secondary">
     <div class="mx-auto max-w-6xl px-6">
-      <div class="grid gap-12 lg:grid-cols-2">
-        <!-- Form -->
-        <Card padding="lg">
-          <h2 class="text-2xl font-display font-bold text-foreground mb-6">{t('contact.form.title')}</h2>
-
-          <ContactForm
-            submitLabel={t('contact.form.submit')}
-            successMessage={t('contact.form.success')}
-            labels={{ name: t('contact.form.nameLabel'), email: t('contact.form.emailLabel') }}
-            placeholders={{
-              name: t('contact.form.namePlaceholder'),
-              email: t('contact.form.emailPlaceholder'),
-              subject: t('contact.form.subjectPlaceholder'),
-              message: t('contact.form.messagePlaceholder'),
-            }}
-          >
-            <Icon slot="icon" name="mail" size="sm" />
-          </ContactForm>
-        </Card>
-
-        <!-- Right column: Map + Contact Info -->
+      <div class="mx-auto max-w-2xl">
         <div class="flex flex-col gap-8">
-          {/* Map: only with an address, since a place embed with no location shows an error */}
           {siteConfig.address && (
             <GoogleMap
               size="sm"
@@ -70,14 +47,12 @@ const github = siteConfig.socialLinks.find((url) => new URL(url).hostname === 'g
             />
           )}
 
-          {/* Contact Info */}
           <div>
             <h2 class="font-display text-2xl font-bold text-foreground mb-6">
               {t('contact.other.title')}
             </h2>
 
             <div class="space-y-4">
-              <!-- Email -->
               <a href={`mailto:${siteConfig.email}`} class="block">
                 <Card hover padding="sm">
                   <div class="flex items-center gap-4">
@@ -92,7 +67,6 @@ const github = siteConfig.socialLinks.find((url) => new URL(url).hostname === 'g
                 </Card>
               </a>
 
-              <!-- GitHub: the first github.com profile in siteConfig.socialLinks -->
               {github && (
                 <a href={github} target="_blank" rel="noopener noreferrer" class="block">
                   <Card hover padding="sm">
@@ -109,7 +83,6 @@ const github = siteConfig.socialLinks.find((url) => new URL(url).hostname === 'g
                 </a>
               )}
 
-              <!-- Twitter -->
               {siteConfig.twitter && (
                 <a
                   href={`https://twitter.com/${siteConfig.twitter.site.replace('@', '')}`}

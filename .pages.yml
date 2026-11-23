@@ -1,0 +1,213 @@
+
+media:
+  input: public/uploads
+  output: /uploads
+  rename: safe
+
+content:
+  - name: blog
+    label: Blog Posts
+    type: collection
+    path: src/content/blog/en
+    format: yaml-frontmatter
+    subfolders: false
+    filename:
+      template: "{primary}.mdx"
+      field: create
+    view:
+      primary: title
+      fields:
+        - title
+        - publishedAt
+        - author
+        - draft
+      sort:
+        - publishedAt
+      default:
+        sort: publishedAt
+        order: desc
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+
+      - name: description
+        label: Description
+        type: text
+        required: true
+
+      - name: publishedAt
+        label: Publication Date
+        type: date
+        required: true
+        options:
+          format: yyyy-MM-dd
+
+      - name: updatedAt
+        label: Last Updated
+        type: date
+        default: ""
+        options:
+          format: yyyy-MM-dd
+
+      - name: author
+        label: Author
+        type: string
+        default: Team
+
+      - name: image
+        label: Featured Image
+        type: image
+
+      - name: imageAlt
+        label: Image Description
+        type: string
+
+      - name: tags
+        label: Tags
+        type: string
+        list: true
+
+      - name: draft
+        label: Draft
+        type: boolean
+        default: false
+
+      - name: featured
+        label: Featured
+        type: boolean
+        default: false
+
+      - name: locale
+        type: string
+        hidden: true
+
+      - name: body
+        label: Article Content
+        type: rich-text
+        options:
+          format: markdown
+          switcher: true
+
+  - name: pages
+    label: Website Pages
+    type: collection
+    path: src/content/pages
+    format: yaml-frontmatter
+    subfolders: false
+    filename:
+      template: "{primary}.md"
+      field: create
+    view:
+      primary: title
+      fields:
+        - title
+        - description
+    fields:
+      - name: title
+        label: Page Title
+        type: string
+        required: true
+
+      - name: description
+        label: Page Description
+        type: text
+        required: true
+
+      - name: updatedAt
+        label: Last Updated
+        type: date
+        default: ""
+        options:
+          format: yyyy-MM-dd
+
+      - name: locale
+        type: string
+        hidden: true
+
+      - name: body
+        label: Page Content
+        type: rich-text
+        options:
+          format: markdown
+          switcher: true
+
+  - name: authors
+    label: Authors
+    type: collection
+    path: src/content/authors
+    format: json
+    subfolders: false
+    filename: "{primary}.json"
+    view:
+      primary: name
+    fields:
+      - name: name
+        label: Name
+        type: string
+        required: true
+
+      - name: bio
+        label: Biography
+        type: text
+        required: true
+
+      - name: avatar
+        label: Avatar
+        type: image
+
+      - name: social
+        label: Social Profiles
+        type: object
+        fields:
+          - name: twitter
+            label: Twitter
+            type: string
+
+          - name: github
+            label: GitHub
+            type: string
+
+          - name: linkedin
+            label: LinkedIn
+            type: string
+
+  - name: faqs
+    label: FAQs
+    type: collection
+    path: src/content/faqs
+    format: json
+    subfolders: false
+    filename:
+      template: "{primary}.json"
+      field: create
+    view:
+      primary: question
+    fields:
+      - name: question
+        label: Question
+        type: string
+        required: true
+
+      - name: answer
+        label: Answer
+        type: text
+        required: true
+
+      - name: category
+        label: Category
+        type: string
+
+      - name: order
+        label: Display Order
+        type: number
+        default: 0
+
+      - name: locale
+        type: string
+        hidden: true
+
+settings:
+  content:
+    merge: true

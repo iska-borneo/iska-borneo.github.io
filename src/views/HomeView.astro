@@ -33,8 +33,8 @@ const receipt = getReceipt();
   <Hero layout="centered" size="lg" showGrid>
     <Badge slot="badge" pill>
       {receipt.velocity
-        ? t('home.hero.badge', { version: receipt.velocity, date: receipt.builtOn })
-        : t('home.hero.badgeNoVersion', { date: receipt.builtOn })}
+        ? t('home.hero.badge', { version: receipt.velocity, date: receipt.builtOn, badge: 'Sanctioned & Certified Combat Training' })
+        : t('home.hero.badgeNoVersion', { date: receipt.builtOn, badge: 'Sanctioned & Certified Combat Training' })}
     </Badge>
 
     <h1 slot="title" class="max-w-4xl">

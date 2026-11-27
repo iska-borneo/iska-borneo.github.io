@@ -1,0 +1,100 @@
+---
+import { getEntry } from 'astro:content';
+
+// Layout import (verify whether your layout file in src/layouts/ is BaseLayout.astro or Layout.astro)
+import Layout from '../layouts/BaseLayout.astro';
+
+import Hero from '../components/hero';
+import ArticleHero from '../components/blog/ArticleHero.astro';
+import Accordion from '../components/ui/overlay/Accordion/Accordion.astro';
+import CtaBand from '../components/blocks/CtaBand';
+
+const entry = await getEntry('pages', 'index');
+if (!entry) throw new Error('Landing page content not found in src/content/pages/index.md');
+const { data } = entry;
+
+// Define CTA object props safely in frontmatter to prevent Astro compiler template errors
+const heroMainCta = { label: data.hero_main.primary_cta_label, href: data.hero_main.primary_cta_target };
+const heroPurposeCta = { label: data.hero_purpose.primary_cta_label, href: data.hero_purpose.primary_cta_target };
+const heroDayOneCta = { label: data.hero_day_one.primary_cta_label, href: data.hero_day_one.primary_cta_target };
+const heroCtaCta = { label: data.hero_call_to_action.primary_cta_label, href: data.hero_call_to_action.primary_cta_target };
+const intakeAnchorCta = { label: data.intake_anchor.cta_label, href: data.intake_anchor.cta_target };
+---
+
+<Layout title={data.title} description={data.description}>
+  <main>
+    <!-- Main Hero -->
+    <Hero 
+      layout="centered" 
+      size="lg" 
+      colorScheme="invert"
+      badge={data.hero_main.badge}
+      headline={data.hero_main.headline}
+      subheadline={data.hero_main.subheadline}
+      primaryCta={heroMainCta}
+    />
+
+    <!-- Block 1: The Reality (2-line bounded header) -->
+    <div class="max-w-3xl mx-auto px-4 py-12">
+      <ArticleHero 
+        title={data.hero_status_quo.headline}
+        description={data.hero_status_quo.subheadline}
+        showMetadata={false}
+      />
+    </div>
+
+    <!-- Block 2: Our Purpose -->
+    <Hero 
+      layout="split" 
+      size="lg" 
+      colorScheme="default"
+      badge={data.hero_purpose.badge}
+      headline={data.hero_purpose.headline}
+      subheadline={data.hero_purpose.subheadline}
+      primaryCta={heroPurposeCta}
+    />
+
+    <!-- Block 3: Zero Ego -->
+    <Hero 
+      layout="centered" 
+      size="sm" 
+      colorScheme="secondary"
+      badge={data.hero_day_one.badge}
+      headline={data.hero_day_one.headline}
+      subheadline={data.hero_day_one.subheadline}
+      primaryCta={heroDayOneCta}
+    />
+
+    <!-- Block 4: Final CTA -->
+    <Hero 
+      layout="centered" 
+      size="xl" 
+      colorScheme="invert"
+      showGrid={true}
+      badge={data.hero_call_to_action.badge}
+      headline={data.hero_call_to_action.headline}
+      subheadline={data.hero_call_to_action.subheadline}
+      primaryCta={heroCtaCta}
+    />
+
+    <!-- 4W1H Architecture -->
+    <section class="max-w-4xl mx-auto px-4 py-16">
+      <div class="mb-8 p-6 rounded-xl border border-border bg-surface">
+        <h3 class="text-xl font-bold mb-2">{data.why_section.title}</h3>
+        <p class="text-muted-foreground">{data.why_section.description}</p>
+      </div>
+
+      <Accordion variant="card" exclusive={true} items={data.accordion_items} />
+    </section>
+
+    <!-- Intake Anchor Band (Forced Dark, Full Width) -->
+    <div class="w-full bg-surface-invert text-foreground-invert">
+      <CtaBand 
+        tone="invert"
+        title={data.intake_anchor.title}
+        description={data.intake_anchor.description}
+        primaryCta={intakeAnchorCta}
+      />
+    </div>
+  </main>
+</Layout>

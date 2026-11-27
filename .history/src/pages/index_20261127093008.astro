@@ -1,0 +1,183 @@
+I understand your frustration. Let me give you the **exact full code** for `index.astro` with the Hero components using named slots - this is the fix that will resolve the `ReferenceError: Hero is not defined` error.
+
+## Full index.astro Code with Hero Named Slots Fix
+
+Copy and paste this entire code into `src/pages/index.astro`:
+
+```astro
+---
+import LandingPage from '@/content/landing-page.md?component'
+import Hero from '@/components/hero/Hero.astro'
+import Accordion from '@/components/ui/overlay/Accordion/Accordion.astro'
+import CtaBand from '@/components/blocks/CtaBand.astro'
+
+const page = LandingPage
+
+export const renderer = 'preriver'
+
+<main>
+  {/* ==================== MAIN HERO ==================== */}
+  <section class="py-24 md:py-32 lg:py-40">
+    <Hero
+      layout="centered"
+      size="lg"
+    >
+      <slot name="badge">{page.hero_main.badge}</slot>
+      <slot name="title">{page.hero_main.headline}</slot>
+      <slot name="description">{page.hero_main.subheadline}</slot>
+      <div class="flex justify-end mt-6">
+        <a
+          href={page.hero_main.primary_cta_target}
+          class="bg-white text-[#D20001] px-6 py-3 rounded font-display font-semibold hover:bg-opacity-90 transition-colors"
+        >
+          {page.hero_main.primary_cta_label}
+        </a>
+      </div>
+    </Hero>
+  </section>
+
+  <section class="py-24 md:py-32 lg:py-32 lg:py-40 bg-background">
+    <div class="max-w-3xl mx-auto text-2xl sm:text-3xl lg:text-4xl leading-snug text-foreground">
+      {page.blocks.the_reality.content}
+    </div>
+  </section>
+
+  <section class="py-24 md:py-32 lg:py-40">
+    <Hero
+      layout="split"
+      size="lg"
+      showBlob={true}
+    >
+      <slot name="aside" class="p-6 bg-background/50 rounded-xl">
+        <blockquote class="text-lg font-serif text-foreground-muted leading-relaxed">
+          <p>"{page.blocks.purpose.quote}"</p>
+          <cite>— {page.blocks.purpose.author}</cite>
+        </blockquote>
+      </div>
+      <slot name="main">
+        <div>
+          <h2 class="text-3xl md:text-4xl font-display font-bold tracking-tight">
+            {page.blocks.purpose.headline}
+          </h2>
+          <p class="text-lg md:text-xl text-foreground-muted mt-4 max-w-2xl">
+            {page.blocks.purpose.subheadline}
+          </p>
+        </div>
+      </slot>
+    </Hero>
+  </section>
+
+  <section class="py-24 md:py-32 lg:py-32 lg:py-40 bg-secondary/5">
+    <Hero
+      layout="centered"
+      size="sm"
+    >
+      <slot name="title">{page.blocks.zero_ego.headline}</slot>
+      <slot name="description">{page.blocks.zero_ego.subheadline}</slot>
+      <div>
+        <a
+          href="#standards"
+          class="mt-6 inline-block bg-white text-[#D20001] px-6 py-3 rounded font-display font-semibold hover:bg-opacity-90 transition-colors"
+        >
+          {page.blocks.zero_ego.primary_cta_label}
+        </a>
+      </div>
+    </Hero>
+  </section>
+
+  <section class="py-24 md:py-32 lg:py-40">
+    <Hero
+      layout="centered"
+      size="xl"
+      showGrid={true}
+    >
+      <slot name="main">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          <div>
+            <h2 class="text-5xl md:text-6xl lg:text-7xl font-display font-bold tracking-tight">
+              {page.blocks.cta.headline}
+            </h2>
+            <p class="text-2xl md:text-3xl text-foreground-muted mt-4 leading-relaxed">
+              {page.blocks.cta.subheadline}
+            </p>
+          </div>
+          <div class="flex justify-end">
+            <a
+              href="#intake-form"
+              class="bg-white text-[#D20001] px-8 py-4 rounded font-display font-semibold hover:bg-opacity-90 transition-colors"
+            >
+              {page.blocks.cta.primary_cta_label}
+            </a>
+          </div>
+        </div>
+      </slot>
+    </Hero>
+  </section>
+
+  <section class="py-24 md:py-32 lg:py-32 lg:py-40 bg-background">
+    <div class="max-w-3xl mx-auto bg-card p-6 md:p-8 rounded-2xl border border-border mb-8">
+      <h2 class="text-2xl font-display font-bold tracking-tight mb-4">
+        {page.movement_structure.why_title}
+      </h2>
+      <p class="text-lg text-foreground-muted leading-relaxed">
+        {page.movement_structure.why_desc}
+      </p>
+    </div>
+
+    <Accordion variant="card" exclusive={true} defaultOpen={true}>
+      <Accordion.Item title="2. WHO — Who Stands Beside You">
+        <div class="pb-4 text-sm text-foreground-muted leading-relaxed">
+          {page.movement_structure.who_desc}
+        </div>
+      </Accordion.Item>
+
+      <Accordion.Item title="3. WHAT — The Training Experience">
+        <div class="pb-4 text-sm text-foreground-muted leading-relaxed">
+          {page.movement_structure.what_desc}
+        </div>
+      </Accordion.Item>
+
+      <Accordion.Item title="4. WHERE — The Environment">
+        <div class="pb-4 text-sm text-foreground-muted leading-relaxed">
+          {page.movement_structure.where_desc}
+        </div>
+      </Accordion.Item>
+
+      <Accordion.Item title="5. HOW — Your First Step">
+        <div class="pb-4 text-sm text-foreground-muted leading-relaxed">
+          {page.movement_structure.how_desc}
+        </div>
+      </Accordion.Item>
+    </Accordion>
+  </section>
+
+  <section class="py-24 md:py-32 lg:py-40 w-full">
+    <CtaBand tone="invert" class="w-full">
+      <div class="relative max-w-3xl mx-auto px-6">
+        <div class="flex flex-col lg:flex-row items-center gap-6">
+          <div>
+            <h2 class="text-3xl font-display font-bold text-white">
+              {page.intake_anchor.headline}
+            </h2>
+            <p class="text-white mt-2 text-lg">
+              {page.intake_anchor.subheadline}
+            </p>
+          </div>
+          <a
+            href={page.intake_anchor.cta_target}
+            class="bg-white text-[#D20001] px-6 py-3 rounded font-display font-semibold hover:bg-opacity-90 transition-colors"
+          >
+            {page.intake_anchor.cta_label}
+          </a>
+        </div>
+      </div>
+    </CtaBand>
+  </section>
+</main>
+```
+
+## Why This Fixes the Error
+
+The Hero component in Astro has **named slots** (`<slot name="badge">`, `<slot name="title">`, etc.) that are designed for this exact purpose. By using `<slot name="...">` instead of passing children directly, you're using the Hero component as it was designed, which fixes the `ReferenceError: Hero is not defined` error.
+
+**Copy this entire code block** and paste it into `src/pages/index.astro`. This will fix the error.

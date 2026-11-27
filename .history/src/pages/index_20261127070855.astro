@@ -1,0 +1,182 @@
+import LandingPage from '@/content/landing-page.md?component'
+import Hero from '@/components/hero/Hero.astro'
+import Accordion from '@/components/ui/overlay/Accordion/Accordion.astro'
+import CtaBand from '@/components/blocks/CtaBand.astro'
+
+const page = LandingPage
+
+export const renderer = 'prerender'
+
+<main>
+  {/* ==================== MAIN HERO ==================== */}
+  <section class="py-24 md:py-32 lg:py-40">
+    <Hero
+      layout="centered"
+      size="lg"
+      colorScheme="invert"
+    >
+      <div class="inline-block">
+        <span
+          class="bg-[#D20001] text-black px-2 py-0.5 rounded text-xs mr-3"
+        >
+          {page.hero_main.badge}
+        </span>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-display font-bold tracking-tight leading-tight">
+          {page.hero_main.headline}
+        </h1>
+        <p class="text-lg md:text-xl lg:text-2xl text-foreground-muted mt-4 max-w-2xl">
+          {page.hero_main.subheadline}
+        </p>
+      </div>
+      <div class="flex justify-end mt-6">
+        <a
+          href={page.hero_main.primary_cta_target}
+          class="bg-white text-[#D20001] px-6 py-3 rounded font-display font-semibold hover:bg-opacity-90 transition-colors"
+        >
+          {page.hero_main.primary_cta_label}
+        </a>
+      </div>
+    </Hero>
+  </section>
+
+  <section class="py-24 md:py-32 lg:py-40 bg-background">
+    <div class="max-w-3xl mx-auto text-2xl sm:text-3xl lg:text-4xl leading-snug text-foreground">
+      {page.blocks.the_reality.content}
+    </div>
+  </section>
+
+  <section class="py-24 md:py-32 lg:py-40">
+    <Hero
+      layout="split"
+      size="lg"
+      colorScheme="default"
+      showBlob={true}
+    >
+      <div slot="aside" class="p-6 bg-background/50 rounded-xl">
+        <blockquote class="text-lg font-serif text-foreground-muted leading-relaxed">
+          <p>"{page.blocks.purpose.quote}"</p>
+          <cite>— {page.blocks.purpose.author}</cite>
+        </blockquote>
+      </div>
+      <div>
+        <h2 class="text-3xl md:text-4xl font-display font-bold tracking-tight">
+          {page.blocks.purpose.headline}
+        </h2>
+        <p class="text-lg md:text-xl text-foreground-muted mt-4 max-w-2xl">
+          {page.blocks.purpose.subheadline}
+        </p>
+      </div>
+    </Hero>
+  </section>
+
+  <section class="py-24 md:py-32 lg:py-40 bg-secondary/5">
+    <Hero
+      layout="centered"
+      size="sm"
+      colorScheme="secondary"
+    >
+      <div>
+        <h2 class="text-3xl md:text-4xl font-display font-bold tracking-tight">
+          {page.blocks.zero_ego.headline}
+        </h2>
+        <p class="text-lg md:text-xl text-foreground-muted mt-4 max-w-2xl">
+          {page.blocks.zero_ego.subheadline}
+        </p>
+        <a
+          href="#standards"
+          class="mt-6 inline-block bg-white text-[#D20001] px-6 py-3 rounded font-display font-semibold hover:bg-opacity-90 transition-colors"
+        >
+          {page.blocks.zero_ego.primary_cta_label}
+        </a>
+      </div>
+    </Hero>
+  </section>
+
+  <section class="py-24 md:py-32 lg:py-40">
+    <Hero
+      layout="centered"
+      size="xl"
+      colorScheme="invert"
+      showGrid={true}
+    >
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+        <div>
+          <h2 class="text-5xl md:text-6xl lg:text-7xl font-display font-bold tracking-tight">
+            {page.blocks.cta.headline}
+          </h2>
+          <p class="text-2xl md:text-3xl text-foreground-muted mt-4 leading-relaxed">
+            {page.blocks.cta.subheadline}
+          </p>
+        </div>
+        <div class="flex justify-end">
+          <a
+            href="#intake-form"
+            class="bg-white text-[#D20001] px-8 py-4 rounded font-display font-semibold hover:bg-opacity-90 transition-colors"
+          >
+            {page.blocks.cta.primary_cta_label}
+          </a>
+        </div>
+      </div>
+    </Hero>
+  </section>
+
+  <section class="py-24 md:py-32 lg:py-40 bg-background">
+    <div class="max-w-3xl mx-auto bg-card p-6 md:p-8 rounded-2xl border border-border mb-8">
+      <h2 class="text-2xl font-display font-bold tracking-tight mb-4">
+        {page.movement_structure.why_title}
+      </h2>
+      <p class="text-lg text-foreground-muted leading-relaxed">
+        {page.movement_structure.why_desc}
+      </p>
+    </div>
+
+    <Accordion variant="card" exclusive={true} defaultOpen={true}>
+      <Accordion.Item title="2. WHO — Who Stands Beside You">
+        <div class="pb-4 text-sm text-foreground-muted leading-relaxed">
+          {page.movement_structure.who_desc}
+        </div>
+      </Accordion.Item>
+
+      <Accordion.Item title="3. WHAT — The Training Experience">
+        <div class="pb-4 text-sm text-foreground-muted leading-relaxed">
+          {page.movement_structure.what_desc}
+        </div>
+      </Accordion.Item>
+
+      <Accordion.Item title="4. WHERE — The Environment">
+        <div class="pb-4 text-sm text-foreground-muted leading-relaxed">
+          {page.movement_structure.where_desc}
+        </div>
+      </Accordion.Item>
+
+      <Accordion.Item title="5. HOW — Your First Step">
+        <div class="pb-4 text-sm text-foreground-muted leading-relaxed">
+          {page.movement_structure.how_desc}
+        </div>
+      </Accordion.Item>
+    </Accordion>
+  </section>
+
+  <section class="py-24 md:py-32 lg:py-40 w-full">
+    <CtaBand tone="invert" class="w-full">
+      <div class="relative max-w-3xl mx-auto px-6">
+        <div class="flex flex-col lg:flex-row items-center gap-6">
+          <div>
+            <h2 class="text-3xl font-display font-bold text-white">
+              {page.intake_anchor.headline}
+            </h2>
+            <p class="text-white mt-2 text-lg">
+              {page.intake_anchor.subheadline}
+            </p>
+          </div>
+          <a
+            href={page.intake_anchor.cta_target}
+            class="bg-white text-[#D20001] px-6 py-3 rounded font-display font-semibold hover:bg-opacity-90 transition-colors"
+          >
+            {page.intake_anchor.cta_label}
+          </a>
+        </div>
+      </div>
+    </CtaBand>
+  </section>
+</main>

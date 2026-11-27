@@ -1,0 +1,125 @@
+---
+import { getEntry } from 'astro:content';
+
+// Layout import (check if your file in src/layouts/ is BaseLayout.astro or Layout.astro)
+import Layout from '../layouts/BaseLayout.astro';
+
+import Hero from '../components/hero';
+import ArticleHero from '../components/blog/ArticleHero.astro';
+import Accordion from '../components/ui/overlay/Accordion/Accordion.astro';
+import CtaBand from '../components/blocks/CtaBand';
+
+const entry = await getEntry('pages', 'index');
+if (!entry) throw new Error('Landing page content not found in src/content/pages/index.md');
+const { data } = entry;
+---
+
+<Layout title={data.title} description={data.description}>
+  <main>
+    <!-- Main Hero -->
+    <Hero 
+      layout="centered" 
+      size="lg" 
+      colorScheme="invert"
+      badge={data.hero_main.badge}
+      headline={data.hero_main.headline}
+      subheadline={data.hero_main.subheadline}
+      primaryCta={{ label: data.hero_main.primary_cta_label, href: data.hero_main.primary_cta_target }}
+    />
+
+    <!-- Block 1: The Reality (2-line bounded header) -->
+    <div class="max-w-3xl mx-auto px-4 py-12">
+      <ArticleHero 
+        title={data.hero_status_quo.headline}
+        description={data.hero_status_quo.subheadline}
+        showMetadata={false}
+      />
+    </div>
+
+    <!-- Block 2: Our Purpose -->
+    <Hero 
+      layout="split" 
+      size="lg" 
+      colorScheme="default"
+      badge={data.hero_purpose.badge}
+      headline={data.hero_purpose.headline}
+      subheadline={data.hero_purpose.subheadline}
+      primaryCta={{ label: data.hero_purpose.primary_cta_label, href: data.hero_purpose.primary_cta_target }}
+    />
+
+    <!-- Block 3: Zero Ego -->
+    <Hero 
+      layout="centered" 
+      size="sm" 
+      colorScheme="secondary"
+      badge={data.hero_day_one.badge}
+      headline={data.hero_day_one.headline}
+      subheadline={data.hero_day_one.subheadline}
+      primaryCta={{ label: data.hero_day_one.primary_cta_label, href: data.hero_day_one.primary_cta_target }}
+    />
+
+    <!-- Block 4: Final CTA -->
+    <Hero 
+      layout="centered" 
+      size="xl" 
+      colorScheme="invert"
+      showGrid={true}
+      badge={data.hero_call_to_action.badge}
+      headline={data.hero_call_to_action.headline}
+      subheadline={data.hero_call_to_action.subheadline}
+      primaryCta={{ label: data.hero_call_to_action.primary_cta_label, href: data.hero_call_to_action.primary_cta_target }}
+    />
+
+    <!-- 4W1H Architecture -->
+    <section class="max-w-4xl mx-auto px-4 py-16">
+      <div class="mb-8 p-6 rounded-xl border border-border bg-surface">
+        <h3 class="text-xl font-bold mb-2">{data.why_section.title}</h3>
+        <p class="text-muted-foreground">{data.why_section.description}</p>
+      </div>
+
+      <Accordion variant="card" exclusive={true} items={data.accordion_items} />
+    </section>
+
+    <!-- Intake Anchor Band (Forced Dark, Full Width) -->
+    <div class="w-full bg-surface-invert text-foreground-invert">
+      <CtaBand 
+        tone="invert"
+        title={data.intake_anchor.title}
+        description={data.intake_anchor.description}
+        primaryCta={{ label: data.intake_anchor.cta_label, href: data.intake_anchor.cta_target }}
+      />
+    </div>
+  </main>
+</Layout>
+4. Entire File Replacement: .pages.yml
+(Completely replace all contents of .pages.yml in your project root with this exact code)
+media:
+  input: public/images
+  output: /images
+
+content:
+  - label: "Landing Page"
+    type: file
+    file: src/content/pages/index.md
+    fields:
+      - { label: "Page Title", name: "title", widget: "string" }
+      - { label: "Meta Description", name: "description", widget: "string" }
+      - { label: "Main Hero Headline", name: "hero_main.headline", widget: "string" }
+      - { label: "Main Hero Subheadline", name: "hero_main.subheadline", widget: "text" }
+      - { label: "Status Quo Headline", name: "hero_status_quo.headline", widget: "string" }
+      - { label: "Status Quo Subheadline", name: "hero_status_quo.subheadline", widget: "text" }
+      - { label: "Purpose Headline", name: "hero_purpose.headline", widget: "string" }
+      - { label: "Purpose Subheadline", name: "hero_purpose.subheadline", widget: "text" }
+      - { label: "Day One Headline", name: "hero_day_one.headline", widget: "string" }
+      - { label: "Day One Subheadline", name: "hero_day_one.subheadline", widget: "text" }
+      - { label: "Call to Action Headline", name: "hero_call_to_action.headline", widget: "string" }
+      - { label: "Call to Action Subheadline", name: "hero_call_to_action.subheadline", widget: "text" }
+      - { label: "WHY Title", name: "why_section.title", widget: "string" }
+      - { label: "WHY Description", name: "why_section.description", widget: "text" }
+      - label: "4W1H Accordion Items"
+        name: "accordion_items"
+        widget: "list"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Content", name: "content", widget: "text" }
+          - { label: "Open by Default", name: "defaultOpen", widget: "boolean" }

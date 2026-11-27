@@ -31,8 +31,8 @@ const en = {
 
   home: {
     hero: {
-      badge: 'Velocity v{version} · built {date}',
-      badgeNoVersion: 'Built {date}',
+      badge: 'Sanctioned & Certified Combat Training',
+      badgeNoVersion: 'Sanctioned & Certified Combat Training',
       title: 'This page is Velocity,',
       titleHighlight: 'measured',
       titleEnd: '.',
@@ -44,6 +44,7 @@ const en = {
     receipt: {
       title: 'Build receipt',
       commit: 'commit {sha}',
+      badge: 'Sanctioned & Certified Combat Training',
       components: 'Components',
       agentSkills: 'Agent skills',
       locales: 'Locales',

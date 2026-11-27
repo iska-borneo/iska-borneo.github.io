@@ -1,0 +1,30 @@
+media:
+  input: public/images
+  output: /images
+
+content:
+  - label: "Landing Page"
+    type: file
+    file: src/content/landingPage/index.md
+    fields:
+      - { label: "Page Title", name: "page_metadata.title", widget: "string" }
+      - { label: "Meta Description", name: "page_metadata.description", widget: "string" }
+      - { label: "Main Hero Headline", name: "hero_main.headline", widget: "string" }
+      - { label: "Main Hero Subheadline", name: "hero_main.subheadline", widget: "text" }
+      - { label: "Status Quo Headline", name: "hero_status_quo.headline", widget: "string" }
+      - { label: "Status Quo Subheadline", name: "hero_status_quo.subheadline", widget: "text" }
+      - { label: "Purpose Headline", name: "hero_purpose.headline", widget: "string" }
+      - { label: "Purpose Subheadline", name: "hero_purpose.subheadline", widget: "text" }
+      - { label: "Day One Headline", name: "hero_day_one.headline", widget: "string" }
+      - { label: "Day One Subheadline", name: "hero_day_one.subheadline", widget: "text" }
+      - { label: "Call to Action Headline", name: "hero_call_to_action.headline", widget: "string" }
+      - { label: "Call to Action Subheadline", name: "hero_call_to_action.subheadline", widget: "text" }
+      - { label: "WHY Title", name: "why_section.title", widget: "string" }
+      - { label: "WHY Description", name: "why_section.description", widget: "text" }
+      - label: "4W1H Accordion Items"
+        name: "accordion_items"
+        widget: "list"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Content", name: "content", widget: "text" }
+          - { label: "Open by Default", name: "defaultOpen", widget: "boolean" }
